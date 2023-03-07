@@ -1,6 +1,6 @@
 import React from "react";
 
-function TextError({ props }) {
+function TextError(props) {
 	return <div className="error">{props.children}</div>;
 }
 
