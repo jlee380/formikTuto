@@ -4,11 +4,11 @@ import * as Yup from "yup";
 import TextError from "./TextError";
 
 const initialValues = {
-	name: "",
-	email: "",
-	channel: "",
-	comments: "",
-	address: "",
+	name: "123",
+	email: "123@gmail.com",
+	channel: "123",
+	comments: "123",
+	address: "123",
 	social: {
 		facebook: "",
 		twitter: "",
@@ -17,8 +17,10 @@ const initialValues = {
 	phNumbers: [""],
 };
 
-const onSubmit = (values) => {
+const onSubmit = (values, onSubmitProps) => {
 	console.log(values);
+	console.log("submit props", onSubmitProps);
+	onSubmitProps.setSubmitting(false);
 };
 
 const validationSchema = Yup.object({
@@ -41,8 +43,8 @@ function YoutubeForm() {
 			initialValues={initialValues}
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
-			validateOnChange={false}
-			validateOnBlur={false}>
+			// validateOnMount
+		>
 			{(formik) => {
 				console.log("formik props", formik);
 				return (
@@ -219,7 +221,9 @@ function YoutubeForm() {
 							Visit field
 						</button>
 
-						<button type="submit">submit</button>
+						<button type="submit" disabled={formik.isSubmitting}>
+							submit
+						</button>
 					</Form>
 				);
 			}}
